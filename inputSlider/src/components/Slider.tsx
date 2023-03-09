@@ -1,16 +1,5 @@
 import { useEffect, useState } from "react";
-import Bullet from "./Bullet";
-import Line from "./Line";
 
-function SliderNo() {
-  return (
-    <div className="slider">
-      <Bullet name="right" />
-      <Line />
-      <Bullet name="left"></Bullet>
-    </div>
-  );
-}
 function Slider() {
   const [rightValue, setRightValue] = useState(0);
   const [leftValue, setLeftValue] = useState(1000);
