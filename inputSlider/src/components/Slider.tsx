@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 function Slider() {
-  const [rightValue, setRightValue] = useState(0);
-  const [leftValue, setLeftValue] = useState(1000);
+  const [rightValue, setRightValue] = useState(1000);
+  const [leftValue, setLeftValue] = useState(0);
 
   //useEffect(()=>onchange({rightValue}))
 
@@ -13,7 +13,7 @@ function Slider() {
         type="range"
         value={leftValue}
         onChange={(e)=> {
-          if(Number(e.target.value) > rightValue){
+          if(Number(e.target.value) < rightValue){
             setLeftValue( Number(e.target.value))
           }}}        min="0"
         max="1000"
