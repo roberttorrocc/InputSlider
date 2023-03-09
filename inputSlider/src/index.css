@@ -1,0 +1,49 @@
+.nums{
+  padding: 10px;
+}
+.bullet--line{
+  border-radius: 3px;
+  height: 5px;
+  position: absolute; 
+  background-color: black;
+  width: 100%;
+  z-index: 1;
+}
+
+.slider {
+  position: relative;
+  width: 200px;
+}
+
+.bullet {
+  background: rebeccapurple;
+  border: black;
+  pointer-events: none;
+  position: absolute;
+  height: 0;
+  width: 200px;
+  outline: none;
+}
+
+.bullet--right {
+  z-index: 3;
+}
+
+.bullet--left {
+  z-index: 4;
+}
+
+/* For Chrome browsers */
+.bullet::-webkit-slider-thumb {
+  background-color: black;
+  border-radius: 50%;
+  box-shadow: 0 0 1px 1px black;
+  cursor: pointer;
+  height: 18px;
+  width: 18px;
+  margin-top: 4px;
+  pointer-events: all;
+  position: relative;
+}
+
+
