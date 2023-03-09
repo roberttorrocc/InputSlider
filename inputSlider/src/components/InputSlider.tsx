@@ -15,8 +15,8 @@ function InputSlider() {
         onChange={(e) => {
           if (Number(e.target.value) < rightValue) {
             setLeftValue(Number(e.target.value));
-          }else{
-            setLeftValue(rightValue-1);
+          } else {
+            setLeftValue(rightValue - 1);
           }
         }}
         min="0"
@@ -33,10 +33,39 @@ function InputSlider() {
         onChange={(e) => {
           if (Number(e.target.value) > leftValue) {
             setRightValue(Number(e.target.value));
-          }else{setRightValue(leftValue+1)}
+          } else {
+            setRightValue(leftValue + 1);
+          }
         }}
         className="bullet bullet--left"
       />
+      <input
+        type="text"
+        name=""
+        id=""
+        value={leftValue}
+        onChange={(e) => {
+          if (Number(e.target.value) < rightValue) {
+            setLeftValue(Number(e.target.value));
+          } else {
+            setLeftValue(rightValue - 1);
+          }
+        }}
+      />
+      <input
+        type="text"
+        name=""
+        id=""
+        value={rightValue}
+        onChange={(e) => {
+          if (Number(e.target.value) > leftValue) {
+            setRightValue(Number(e.target.value));
+          } else {
+            setRightValue(leftValue + 1);
+          }
+        }}
+      />
+
       <p className="nums">{`${leftValue}  asdas   ${rightValue}`}</p>
     </div>
   );
