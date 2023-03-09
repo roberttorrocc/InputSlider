@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function Slider() {
+function InputSlider() {
   const [rightValue, setRightValue] = useState(1000);
   const [leftValue, setLeftValue] = useState(0);
 
@@ -37,9 +37,9 @@ function Slider() {
         }}
         className="bullet bullet--left"
       />
-      <p className="nums">{`${leftValue}     ${rightValue}`}</p>
+      <p className="nums">{`${leftValue}  asdas   ${rightValue}`}</p>
     </div>
   );
 }
 
-export default Slider;
+export default InputSlider;
