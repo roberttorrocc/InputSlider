@@ -42,8 +42,32 @@
   z-index: 4;
 }
 
-/* For Chrome browsers */
+/*For Chrome browsers */
 .bullet::-webkit-slider-thumb {
+  background: rebeccapurple;
+  border-radius: 50%;
+  box-shadow: 0 0 1px 1px cyan;
+  cursor: pointer;
+  height: 18px;
+  width: 18px;
+  margin-top: 4px;
+  pointer-events: all;
+  position: relative;
+}
+/*For Firefox browsers */
+.bullet::-moz-range-thumb {
+  background: rebeccapurple;
+  border-radius: 50%;
+  box-shadow: 0 0 1px 1px cyan;
+  cursor: pointer;
+  height: 18px;
+  width: 18px;
+  margin-top: 4px;
+  pointer-events: all;
+  position: relative;
+}
+/*For Microdoft Edge browsers */
+.bullet::-ms-thumb {
   background: rebeccapurple;
   border-radius: 50%;
   box-shadow: 0 0 1px 1px cyan;
