@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import NormalSlider from "./components/NormalSlider";
-import InputSlider from "./components/InputSlider";
+import NormalSlider from "./views/NormalSlider";
+import InputSlider from "./views/InputSlider";
 import App from "./App";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";

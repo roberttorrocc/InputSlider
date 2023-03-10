@@ -1,3 +1,5 @@
+
+
 .nums{
   padding: 10px;
 }
@@ -42,6 +44,7 @@
   z-index: 4;
 }
 
+/*El color del background no funciona, creo que sigue teniendo los valor por defecto del buscador  */
 /*For Chrome browsers */
 .bullet::-webkit-slider-thumb {
   background: rebeccapurple;
