@@ -1,3 +1,6 @@
+.bullet{
+  cursor: pointer;
+}
 .divTrSlice{
   width: 200px;
 }
@@ -43,14 +46,7 @@ table{
   width: 200px;
 }
 
-.bullet {
-  border: black;
-  pointer-events: none;
-  position: absolute;
-  height: 0px;
-  width: 200px;
-  outline: none;
-}
+
 
 .bullet--right {
   z-index: 3;

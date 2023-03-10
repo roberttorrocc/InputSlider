@@ -7,82 +7,79 @@ function NormalSlider() {
   const [draggingLeft, setDraggingLeft] = useState(false);
   const [draggingRight, setDraggingRight] = useState(false);
 
-  function handleMouseDownLeft(event:React.MouseEvent<HTMLDivElement>) {
+  const handleMouseDownLeft = () => {
     setDraggingLeft(true);
-  }
-  function handleMouseDownRight(event:React.MouseEvent<HTMLDivElement>) {
+  };
+
+  const handleMouseDownRight = () => {
     setDraggingRight(true);
-  }
+  };
 
-  function handleMouseUp(event:React.MouseEvent<HTMLTableElement>) {
-    setDraggingLeft(false);
-    setDraggingRight(false);
-  }
-
-  function handleMouseMove(event:React.MouseEvent<HTMLTableElement>) {
-    const slider = event.currentTarget.getBoundingClientRect();
-    if (draggingLeft) {
-      const x = event.clientX;
-      const rect = slider;
-      const left = x - rect.left;
-      const percentage = (left / rect.width) * 100;
-      const newValue = Math.min(rightValue - 1, Math.round((percentage / 100) * 1000));
-      setLeftValue(newValue);
-    } else if (draggingRight) {
-      const x = event.clientX;
-      const rect = slider;
-      const left = x - rect.left;
-      const percentage = (left / rect.width) * 100;
-      const newValue = Math.max(leftValue + 1, Math.round((percentage / 100) * 1000));
-      setRightValue(newValue);
-    }
-  }
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (draggingLeft) {
+        const newValue = leftValue + e.movementX;
+        if (newValue >= 0 && newValue < rightValue) {
+          setLeftValue(newValue);
+        }
+      }
+      if (draggingRight) {
+        const newValue = rightValue - e.movementX;
+        if (newValue > leftValue && newValue <= 1000) {
+          setRightValue(newValue);
+        }
+      }
+    };
+    const handleMouseUp = () => {
+      setDraggingLeft(false);
+      setDraggingRight(false);
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [draggingLeft, draggingRight, leftValue, rightValue]);
 
   return (
     <div className="slider">
-      <table onMouseUp={handleMouseUp} onMouseMove={handleMouseMove}>
+      <table >
         <tbody>
-          <tr key="tr1">
-            <td key="td1">
-              <p className="numberSlice">{`${leftValue}`}</p>
-            </td>
-            <td key="td2">
-              <div className="divTrSlice">
-                <div
-                  className="bullet bullet--left"
-                  style={{
-                    left: `${(leftValue / 1000) * 100}%`,
-                    zIndex: draggingLeft ? 2 : 1,
-                  }}
-                  onMouseDown={handleMouseDownLeft}
-                />
-                <div className="bullet--line" />
-                <div
-                  className="bullet--line2"
-                  style={{
-                    width: `${getWidthRange(rightValue, leftValue)}%`,
-                    marginLeft: `${getMarginRange(leftValue)}%`,
-                  }}
-                />
-                <div
-                  className="bullet bullet--right"
-                  style={{
-                    left: `${(rightValue / 1000) * 100}%`,
-                    zIndex: draggingRight ? 2 : 1,
-                  }}
-                  onMouseDown={handleMouseDownRight}
-                />
-              </div>
-            </td>
-            <td key="td3">
-              <p className="numberSlice">{`${rightValue}`}</p>
-            </td>
-          </tr>
+        <tr key="tr1">
+          <td key="td1"><p className="numberSlice">{`${leftValue}`}</p></td>
+          <td key="td2">
+            <div className="divTrSlice">
+              <button
+                onMouseDown={handleMouseDownLeft}
+                className="bullet bullet--left"
+                style={{ marginLeft: getMarginRange(leftValue) }}
+              >
+                X
+              </button>
+              <div className="bullet--line" />
+              <div
+                style={{
+                  width: getWidthRange(rightValue, leftValue),
+                  marginLeft: getMarginRange(leftValue),
+                }}
+                className="bullet--line2"
+              />
+              <button
+                onMouseDown={handleMouseDownRight}
+                className="bullet bullet--right"
+                style={{ marginLeft: getMarginRange(rightValue) }}
+              >
+                X
+              </button>
+            </div>
+          </td>
+          <td key="td3"><p className="numberSlice">{`${rightValue}`}</p></td>
+        </tr>
         </tbody>
       </table>
     </div>
   );
-
 }
 
 export default NormalSlider;
