@@ -4,61 +4,85 @@ import { getWidthRange, getMarginRange } from "../utils/utilsFunctions";
 function NormalSlider() {
   const [rightValue, setRightValue] = useState(1000);
   const [leftValue, setLeftValue] = useState(0);
+  const [draggingLeft, setDraggingLeft] = useState(false);
+  const [draggingRight, setDraggingRight] = useState(false);
+
+  function handleMouseDownLeft(event:React.MouseEvent<HTMLDivElement>) {
+    setDraggingLeft(true);
+  }
+  function handleMouseDownRight(event:React.MouseEvent<HTMLDivElement>) {
+    setDraggingRight(true);
+  }
+
+  function handleMouseUp(event:React.MouseEvent<HTMLTableElement>) {
+    setDraggingLeft(false);
+    setDraggingRight(false);
+  }
+
+  function handleMouseMove(event:React.MouseEvent<HTMLTableElement>) {
+    const slider = event.currentTarget.getBoundingClientRect();
+    if (draggingLeft) {
+      const x = event.clientX;
+      const rect = slider;
+      const left = x - rect.left;
+      const percentage = (left / rect.width) * 100;
+      const newValue = Math.min(rightValue - 1, Math.round((percentage / 100) * 1000));
+      setLeftValue(newValue);
+    } else if (draggingRight) {
+      const x = event.clientX;
+      const rect = slider;
+      const left = x - rect.left;
+      const percentage = (left / rect.width) * 100;
+      const newValue = Math.max(leftValue + 1, Math.round((percentage / 100) * 1000));
+      setRightValue(newValue);
+    }
+  }
 
   return (
     <div className="slider">
-      <table >
+      <table onMouseUp={handleMouseUp} onMouseMove={handleMouseMove}>
         <tbody>
-        <tr key="tr1">
-          <td key="td1"><p className="numberSlice">{`${leftValue}`}</p></td>
-          <td key="td2">
-            <div className="divTrSlice">
-            <input
-              title="leftBullet"
-              type="range"
-              value={leftValue}
-              onChange={(e) => {
-                if (Number(e.target.value) < rightValue) {
-                  setLeftValue(Number(e.target.value));
-                } else {
-                  setLeftValue(rightValue - 1);
-                }
-              }}
-              min="0"
-              max="1000"
-              className="bullet bullet--left"
-            />
-            <div className="bullet--line" />
-            <div
-              style={{
-                width: getWidthRange(rightValue, leftValue),
-                marginLeft: getMarginRange(leftValue),
-              }}
-              className="bullet--line2"
-            />
-            <input
-              title="rightBullet"
-              type="range"
-              value={rightValue}
-              min="0"
-              max="1000"
-              onChange={(e) => {
-                if (Number(e.target.value) > leftValue) {
-                  setRightValue(Number(e.target.value));
-                } else {
-                  setRightValue(leftValue + 1);
-                }
-              }}
-              className="bullet bullet--left"
-            />
-            </div>
-          </td>
-          <td key="td3"><p className="numberSlice">{`${rightValue}`}</p></td>
-        </tr>
+          <tr key="tr1">
+            <td key="td1">
+              <p className="numberSlice">{`${leftValue}`}</p>
+            </td>
+            <td key="td2">
+              <div className="divTrSlice">
+                <div
+                  className="bullet bullet--left"
+                  style={{
+                    left: `${(leftValue / 1000) * 100}%`,
+                    zIndex: draggingLeft ? 2 : 1,
+                  }}
+                  onMouseDown={handleMouseDownLeft}
+                />
+                <div className="bullet--line" />
+                <div
+                  className="bullet--line2"
+                  style={{
+                    width: `${getWidthRange(rightValue, leftValue)}%`,
+                    marginLeft: `${getMarginRange(leftValue)}%`,
+                  }}
+                />
+                <div
+                  className="bullet bullet--right"
+                  style={{
+                    left: `${(rightValue / 1000) * 100}%`,
+                    zIndex: draggingRight ? 2 : 1,
+                  }}
+                  onMouseDown={handleMouseDownRight}
+                />
+              </div>
+            </td>
+            <td key="td3">
+              <p className="numberSlice">{`${rightValue}`}</p>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
   );
+
 }
 
 export default NormalSlider;
