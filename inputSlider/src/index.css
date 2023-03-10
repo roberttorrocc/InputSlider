@@ -1,4 +1,20 @@
+.divTrSlice{
+  width: 200px;
+}
+.numberSlice{
+width: 20px;
+}
 
+tr{
+  display: block;
+}
+td{
+  display: table-cell;
+}
+table{
+  border-collapse: separate;
+  border-spacing: 0px 5px;
+}
 
 .nums{
   padding: 10px;
