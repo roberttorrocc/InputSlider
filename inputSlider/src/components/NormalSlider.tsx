@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
+import { getWidthRange,getMarginRange } from "../utils/utilsFunctions";
 
 function NormalSlider() {
   const [rightValue, setRightValue] = useState(1000);
   const [leftValue, setLeftValue] = useState(0);
-
-  //useEffect(()=>onchange({rightValue}))
 
   return (
     <div className="slider">
@@ -24,6 +23,7 @@ function NormalSlider() {
         className="bullet bullet--left"
       />
       <div className="bullet--line" />
+      <div style={{ width: getWidthRange(rightValue,leftValue), marginLeft: getMarginRange(leftValue)}} className="bullet--line2" />
       <input
         title="rightBullet"
         type="range"
