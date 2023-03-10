@@ -8,9 +8,11 @@ function NormalSlider() {
   return (
     <div className="slider">
       <table >
-        <tr >
-          <td >{`${leftValue}`}</td>
-          <td >
+        <tbody>
+        <tr key="tr1">
+          <td key="td1"><p className="numberSlice">{`${leftValue}`}</p></td>
+          <td key="td2">
+            <div className="divTrSlice">
             <input
               title="leftBullet"
               type="range"
@@ -49,10 +51,11 @@ function NormalSlider() {
               }}
               className="bullet bullet--left"
             />
+            </div>
           </td>
-
-          <td >{`${rightValue}`}</td>
+          <td key="td3"><p className="numberSlice">{`${rightValue}`}</p></td>
         </tr>
+        </tbody>
       </table>
     </div>
   );
