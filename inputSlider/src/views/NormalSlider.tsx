@@ -18,13 +18,16 @@ function NormalSlider() {
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (draggingLeft) {
-        const newValue = leftValue + (e.movementX);
+        const newValue = leftValue + e.offsetX;
+        console.log("leftValue:" + leftValue);
+        console.log("clientx: " + e.clientX);
+        console.log("ofsetx: " + e.offsetX);
         if (newValue >= 0 && newValue < rightValue) {
           setLeftValue(newValue);
         }
       }
       if (draggingRight) {
-        const newValue = rightValue + e.movementX;
+        const newValue = rightValue + e.offsetX;
         if (newValue > leftValue && newValue <= 1000) {
           setRightValue(newValue);
         }
