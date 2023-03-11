@@ -18,7 +18,7 @@ function NormalSlider() {
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (draggingLeft) {
-        const newValue = leftValue + e.movementX;
+        const newValue = leftValue + (e.movementX);
         if (newValue >= 0 && newValue < rightValue) {
           setLeftValue(newValue);
         }
@@ -44,40 +44,33 @@ function NormalSlider() {
 
   return (
     <div className="slider">
-      <table >
-        <tbody>
-        <tr key="tr1">
-          <td key="td1"><p className="numberSlice">{`${leftValue}`}</p></td>
-          <td key="td2">
-            <div className="divTrSlice">
-              <button
-                onMouseDown={handleMouseDownLeft}
-                className="bullet bullet--left"
-                style={{ marginLeft: getMarginRange(leftValue) }}
-              >
-                X
-              </button>
-              <div className="bullet--line" />
-              <div
-                style={{
-                  width: getWidthRange(rightValue, leftValue),
-                  marginLeft: getMarginRange(leftValue),
-                }}
-                className="bullet--line2"
-              />
-              <button
-                onMouseDown={handleMouseDownRight}
-                className="bullet bullet--right"
-                style={{ marginLeft: getMarginRange(rightValue) }}
-              >
-                X
-              </button>
-            </div>
-          </td>
-          <td key="td3"><p className="numberSlice">{`${rightValue}`}</p></td>
-        </tr>
-        </tbody>
-      </table>
+      <p className="numberSlice">{`${leftValue}`}</p>
+
+      <div className="divTrSlice">
+        <button
+          onMouseDown={handleMouseDownLeft}
+          className="bullet bullet--left"
+          style={{ marginLeft: getMarginRange(leftValue) }}
+        >
+          x
+        </button>
+        <div className="bullet--line" />
+        <div
+          style={{
+            width: getWidthRange(rightValue, leftValue),
+            marginLeft: getMarginRange(leftValue),
+          }}
+          className="bullet--line2"
+        />
+        <button
+          onMouseDown={handleMouseDownRight}
+          className="bullet bullet--right"
+          style={{ marginLeft: getMarginRange(rightValue) }}
+        >
+          x
+        </button>
+      </div>
+      <p className="numberSlice">{`${rightValue}`}</p>
     </div>
   );
 }

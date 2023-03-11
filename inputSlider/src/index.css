@@ -1,22 +1,18 @@
-.bullet{
+.bullet{ 
+  width: auto;
+  height: auto;
+  border-radius: 50%;
   cursor: pointer;
+  position: absolute;
 }
 .divTrSlice{
+  display: flex;
+  place-items: center;
+  position: relative;
   width: 200px;
 }
 .numberSlice{
 width: 20px;
-}
-
-tr{
-  display: block;
-}
-td{
-  display: table-cell;
-}
-table{
-  border-collapse: separate;
-  border-spacing: 0px 5px;
 }
 
 .nums{
@@ -40,58 +36,19 @@ table{
   z-index: 2;
 }
 
-
 .slider {
   position: relative;
   width: 200px;
 }
-
-
 
 .bullet--right {
   z-index: 3;
 }
 
 .bullet--left {
-  z-index: 4;
+  z-index: 3;
 }
 
-/*El color del background no funciona, creo que sigue teniendo los valor por defecto del buscador  */
-/*For Chrome browsers */
-.bullet::-webkit-slider-thumb {
-  background: rebeccapurple;
-  border-radius: 50%;
-  box-shadow: 0 0 1px 1px cyan;
-  cursor: pointer;
-  height: 18px;
-  width: 18px;
-  margin-top: 4px;
-  pointer-events: all;
-  position: relative;
-}
-/*For Firefox browsers */
-.bullet::-moz-range-thumb {
-  background: rebeccapurple;
-  border-radius: 50%;
-  box-shadow: 0 0 1px 1px cyan;
-  cursor: pointer;
-  height: 18px;
-  width: 18px;
-  margin-top: 4px;
-  pointer-events: all;
-  position: relative;
-}
-/*For Microdoft Edge browsers */
-.bullet::-ms-thumb {
-  background: rebeccapurple;
-  border-radius: 50%;
-  box-shadow: 0 0 1px 1px cyan;
-  cursor: pointer;
-  height: 18px;
-  width: 18px;
-  margin-top: 4px;
-  pointer-events: all;
-  position: relative;
-}
+
 
 
