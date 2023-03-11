@@ -2,55 +2,77 @@ import { useEffect, useState } from "react";
 import { getWidthRange, getMarginRange } from "../utils/utilsFunctions";
 
 function InputSlider() {
-  const [rightValue, setRightValue] = useState(1000);
-  const [leftValue, setLeftValue] = useState(0);
   const [rightInputValue, setRightInputValue] = useState(1000);
   const [leftInputValue, setLeftInputValue] = useState(0);
+  const [rightValue, setRightValue] = useState(1000);
+  const [leftValue, setLeftValue] = useState(0);
+  const [draggingLeft, setDraggingLeft] = useState(false);
+  const [draggingRight, setDraggingRight] = useState(false);
+
+  const handleMouseDownLeft = () => {
+    setDraggingLeft(true);
+  };
+
+  const handleMouseDownRight = () => {
+    setDraggingRight(true);
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (draggingLeft) {
+        const newValue = leftValue + e.offsetX;
+        console.log("leftValue:" + leftValue);
+        console.log("clientx: " + e.clientX);
+        console.log("ofsetx: " + e.offsetX);
+        if (newValue >= 0 && newValue < rightValue) {
+          setLeftValue(newValue);
+        }
+      }
+      if (draggingRight) {
+        const newValue = rightValue + e.offsetX;
+        if (newValue > leftValue && newValue <= 1000) {
+          setRightValue(newValue);
+        }
+      }
+    };
+    const handleMouseUp = () => {
+      setDraggingLeft(false);
+      setDraggingRight(false);
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [draggingLeft, draggingRight, leftValue, rightValue]);
 
   return (
     <div className="slider">
-      <input
-        title="leftBullet"
-        type="range"
-        value={leftValue}
-        onChange={(e) => {
-          if (Number(e.target.value) < rightValue) {
-            setLeftValue(Number(e.target.value));
-            setLeftInputValue(Number(e.target.value));
-          } else {
-            setLeftValue(rightValue - 1);
-            setLeftInputValue(rightValue - 1);
-          }
-        }}
-        min="0"
-        max="1000"
-        className="bullet bullet--left"
-      />
-      <div className="bullet--line" />
-      <div
-        style={{
-          width: getWidthRange(rightValue, leftValue),
-          marginLeft: getMarginRange(leftValue),
-        }}
-        className="bullet--line2"
-      />
-      <input
-        title="rightBullet"
-        type="range"
-        value={rightValue}
-        min="0"
-        max="1000"
-        onChange={(e) => {
-          if (Number(e.target.value) > leftValue) {
-            setRightValue(Number(e.target.value));
-            setRightInputValue(Number(e.target.value));
-          } else {
-            setRightValue(leftValue + 1);
-            setRightInputValue(leftValue + 1);
-          }
-        }}
-        className="bullet bullet--left"
-      />
+      <div className="divTrSlice">
+        <button
+          onMouseDown={handleMouseDownLeft}
+          className="bullet bullet--left"
+          style={{ marginLeft: getMarginRange(leftValue) }}
+        >
+          x
+        </button>
+        <div className="bullet--line" />
+        <div
+          style={{
+            width: getWidthRange(rightValue, leftValue),
+            marginLeft: getMarginRange(leftValue),
+          }}
+          className="bullet--line2"
+        />
+        <button
+          onMouseDown={handleMouseDownRight}
+          className="bullet bullet--right"
+          style={{ marginLeft: getMarginRange(rightValue) }}
+        >
+          x
+        </button>
+      </div>
 
       <br />
       <form
@@ -103,7 +125,6 @@ function InputSlider() {
           }}
         />
       </form>
-
     </div>
   );
 }
