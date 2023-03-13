@@ -46,10 +46,10 @@ function NormalSlider() {
   }, [draggingLeft, draggingRight, leftValue, rightValue]);
 
   return (
-    <div className="slider">
+    <div className="rangeComponent">
       <p className="numberSlice">{`${leftValue}`}</p>
 
-      <div className="divTrSlice">
+      <div className="divSlider">
         <button
           onMouseDown={handleMouseDownLeft}
           className="bullet bullet--left"
@@ -57,18 +57,18 @@ function NormalSlider() {
         >
           x
         </button>
-        <div className="bullet--line" />
+        <div className="sliderLine" />
         <div
           style={{
             width: getWidthRange(rightValue, leftValue),
             marginLeft: getMarginRange(leftValue),
           }}
-          className="bullet--line2"
+          className="sliderLineRange"
         />
         <button
           onMouseDown={handleMouseDownRight}
           className="bullet bullet--right"
-          style={{ marginLeft: getMarginRange(rightValue) }}
+          style={{ marginLeft: getMarginRange(rightValue)-3 }}
         >
           x
         </button>
